@@ -43,11 +43,12 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
     # Override click on systray icon fun
     def iconActivated(self, reason):
         super()
-        _thread.start_new_thread(self.updateInterface, (reason,))
+        if reason == 1:
+            _thread.start_new_thread(self.updateInterface, ())
 
     # Download data from modem
-    def updateInterface(self, reason):
-        while reason == 1:
+    def updateInterface(self):
+        for var in list(range(10)):
             download, upload, signal1, signal2 = code_helper.foundValue()
             print(download, upload, signal1, signal2)
             self.download.setText("Download: " + download)
