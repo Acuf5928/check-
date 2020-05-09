@@ -5,9 +5,8 @@ import PyQt5.QtWidgets as QtWidgets
 import sys
 import _thread
 
-from fbs_runtime.application_context.PyQt5 import ApplicationContext
-
 import code_helper
+from appContext import AppContext
 
 
 class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
@@ -77,11 +76,3 @@ def main(image):
     trayIcon.show()
     exit_code = appctxt.app.exec_()
     sys.exit(exit_code)
-
-
-class AppContext(ApplicationContext):
-    def run(self):
-        return self.app.exec_()
-
-    def icon(self):
-        return self.get_resource("images/icon.png")
